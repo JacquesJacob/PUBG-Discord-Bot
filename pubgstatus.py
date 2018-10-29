@@ -17,7 +17,7 @@ async def on_message(message):
     if message.content.lower().startswith('!pubg'):
       try:
         cont = str(message.content[6:]).strip(' ')
-        api_key = "TOKEN"
+        api_key = "API_TOKEN"
         header = {
             "Authorization": "Bearer {}".format(api_key),
             "Accept": "application/vnd.api+json"
@@ -38,6 +38,10 @@ async def on_message(message):
         json3 = json2['solo']
         json4 = json2['duo']
         json5 = json2['squad']
+
+        KDSolo = round(json3['kills'] / json3['losses'], 2)
+        KDDuo = round(json4['kills'] / json4['losses'], 2)
+        KDSquad = round(json5['kills'] / json5['losses'], 2)
 
         rankPSolo = json3['rankPoints']
         rankPSolo = int(rankPSolo)
@@ -134,7 +138,9 @@ async def on_message(message):
                                             "----------------------\n"
                                             "Solo\n"
                                             "Partida(s): {}\n"
-                                            "Kills Total: {}\n"
+                                            "Kills: {}\n"
+                                            "K/D: {}\n"
+                                            "Assistencias: {}\n"
                                             "Record Kills em partida: {}\n"
                                             "Kills por Headshot: {}\n"
                                             "Top 10: {}\n"
@@ -145,6 +151,7 @@ async def on_message(message):
                                             "Duo\n"
                                             "Partida(s): {}\n"
                                             "Kills: {}\n"
+                                            "K/D: {}\n"
                                             "Assistencias: {}\n"
                                             "Record Kills em partida: {}\n"
                                             "Kills por Headshot: {}\n"
@@ -156,6 +163,7 @@ async def on_message(message):
                                             "Squad\n"
                                             "Partida(s): {}\n"
                                             "Kills: {}\n"
+                                            "K/D: {}\n"
                                             "Assistencias: {}\n"
                                             "Record Kills em partida: {}\n"
                                             "Kills por Headshot: {}\n"
@@ -167,6 +175,8 @@ async def on_message(message):
                                                         cont,
                                                         json3['roundsPlayed'],
                                                         json3['kills'],
+                                                        KDSolo,
+                                                        json3['assists'],
                                                         json3['roundMostKills'],
                                                         json3['headshotKills'],
                                                         json3['top10s'],
@@ -175,6 +185,7 @@ async def on_message(message):
                                                         rankPSolo, Solo,
                                                         json4['roundsPlayed'],
                                                         json4['kills'],
+                                                        KDDuo,
                                                         json4['assists'],
                                                         json4['roundMostKills'],
                                                         json4['headshotKills'],
@@ -184,6 +195,7 @@ async def on_message(message):
                                                         rankPDuo, Duo,
                                                         json5['roundsPlayed'],
                                                         json5['kills'],
+                                                        KDSquad,
                                                         json5['assists'],
                                                         json5['roundMostKills'],
                                                         json5['headshotKills'],
@@ -199,8 +211,8 @@ async def on_message(message):
 
         ######### CONEXAO COM O BANCO DE DADOS MYSQL ##############
 
-        cnx = mysql.connector.connect(user='user', database='db', port='3306', host='db4free.net',
-                                      password='passwd')
+        cnx = mysql.connector.connect(user='user', database='db', port='3306', host='host_db',
+                                      password='password')
 
         cursor = cnx.cursor()
 
@@ -228,4 +240,4 @@ async def on_message(message):
           await client.send_message(message.channel, "Não foi possivel encontrar este jogador! Verifique se o "
                                                      "NickName esta correto!")
 
-client.run('TOKEN')
+client.run('API_TOKEN')
