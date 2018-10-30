@@ -17,7 +17,7 @@ async def on_message(message):
     if message.content.lower().startswith('!pubg'):
       try:
         cont = str(message.content[6:]).strip(' ')
-        api_key = "API_TOKEN"
+        api_key = "API_PUBG_TOKEN"
         header = {
             "Authorization": "Bearer {}".format(api_key),
             "Accept": "application/vnd.api+json"
@@ -38,10 +38,6 @@ async def on_message(message):
         json3 = json2['solo']
         json4 = json2['duo']
         json5 = json2['squad']
-
-        KDSolo = round(json3['kills'] / json3['losses'], 2)
-        KDDuo = round(json4['kills'] / json4['losses'], 2)
-        KDSquad = round(json5['kills'] / json5['losses'], 2)
 
         rankPSolo = json3['rankPoints']
         rankPSolo = int(rankPSolo)
@@ -67,25 +63,37 @@ async def on_message(message):
         MPointsDuo = int(json4['bestRankPoint'])
         MPointsSquad = int(json5['bestRankPoint'])
 
+        KDSolo = 0
+        KDDuo = 0
+        KDSquad = 0
+
         if SoloPlayed <= 9:
             rankPSolo = 0
             Solo = '(menos de 10 partidas)'
         elif rankPSolo <= 1399:
                 Solo = bronze
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
         elif rankPSolo >= 1500 and rankPSolo <= 1599:
                 Solo = ouro
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
         elif rankPSolo >= 1400 and rankPSolo <= 1499:
                 Solo = prata
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
         elif rankPSolo >= 1600 and rankPSolo <= 1699:
                 Solo = platinum
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
         elif rankPSolo >= 1700 and rankPSolo <= 1799:
                 Solo = diamond
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
         elif rankPSolo >= 1800 and rankPSolo <= 1899:
                 Solo = elite
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
         elif rankPSolo >= 1900 and rankPSolo <= 1999:
                 Solo = master
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
         else:
                 Solo = grandmaster
+                KDSolo = round(json3['kills'] / json3['losses'], 2)
 
 
         if DuoPlayed <= 9:
@@ -93,20 +101,28 @@ async def on_message(message):
             Duo = '(menos de 10 partidas)'
         elif rankPDuo <= 1399:
             Duo = bronze
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
         elif rankPDuo >= 1500 and rankPDuo <= 1599:
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
             Duo = ouro
         elif rankPDuo >= 1400 and rankPDuo <= 1499:
             Duo = prata
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
         elif rankPDuo >= 1600 and rankPDuo <= 1699:
             Duo = platinum
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
         elif rankPDuo >= 1700 and rankPDuo <= 1799:
             Duo = diamond
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
         elif rankPDuo >= 1800 and rankPDuo <= 1899:
             Duo = elite
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
         elif rankPDuo >= 1900 and rankPDuo <= 1999:
             Duo = master
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
         else:
             Duo = grandmaster
+            KDDuo = round(json4['kills'] / json4['losses'], 2)
 
 
         if SquadPlayed <= 9:
@@ -114,20 +130,28 @@ async def on_message(message):
             Squad = '(menos de 10 partidas)'
         elif rankPSquad <= 1399:
             Squad = bronze
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
         elif rankPSquad >= 1500 and rankPSquad <= 1599:
             Squad = ouro
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
         elif rankPSquad >= 1400 and rankPSquad <= 1499:
             Squad = prata
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
         elif rankPSquad >= 1600 and rankPSquad <= 1699:
             Squad = platinum
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
         elif rankPSquad >= 1700 and rankPSquad <= 1799:
             Squad = diamond
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
         elif rankPSquad >= 1800 and rankPSquad <= 1899:
             Squad = elite
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
         elif rankPSquad >= 1900 and rankPSquad <= 1999:
             Squad = master
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
         else:
             Squad = grandmaster
+            KDSquad = round(json5['kills'] / json5['losses'], 2)
 
 
 
@@ -211,7 +235,7 @@ async def on_message(message):
 
         ######### CONEXAO COM O BANCO DE DADOS MYSQL ##############
 
-        cnx = mysql.connector.connect(user='user', database='db', port='3306', host='host_db',
+        cnx = mysql.connector.connect(user='userdb', database='db', port='3306', host='host',
                                       password='password')
 
         cursor = cnx.cursor()
@@ -240,4 +264,4 @@ async def on_message(message):
           await client.send_message(message.channel, "Não foi possivel encontrar este jogador! Verifique se o "
                                                      "NickName esta correto!")
 
-client.run('API_TOKEN')
+client.run('DISCORD_TOKEN')
