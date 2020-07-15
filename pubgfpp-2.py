@@ -122,7 +122,7 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=EmbedPu)
 
             except KeyError:
-                await client.send_message(message.channel, "Não foi possivel encontrar este Player!" 
+                await client.send_message(message.channel, "Não foi possivel encontrar este Player! " 
                                                            "Verifique se digitou corretamente. ")
         else:
 
