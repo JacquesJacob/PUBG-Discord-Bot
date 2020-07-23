@@ -123,7 +123,7 @@ async def on_message(message):
 
             except KeyError:
                 await client.send_message(message.channel, "Não foi possivel encontrar este Player! " 
-                                                           "Verifique se digitou corretamente. ")
+                                                           "Verifique se digitou corretamente.      ")
         else:
 
             await client.send_message(message.channel, "Favor executar este comando no canal #rank! Obrigado!")
