@@ -22,6 +22,8 @@ discord.py 1.3.4
 
 My Linkedin: https://www.linkedin.com/in/jacques-jacob-18279515/
 
+If you need to see this bot working, follow the discord server to test: https://discord.gg/QkRuWgy
+
 Best Regards
 
 Jacques Jacob
