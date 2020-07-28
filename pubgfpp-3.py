@@ -20,7 +20,7 @@ async def on_message(message):
 
             try:
                 cont = str(message.content[5:]).strip(' ')
-                api_key = "PUBG_API_TOKEN"
+                api_key = "PUBG-API-TOKEN"
                 header = {"Authorization": "Bearer {}".format(api_key), "Accept": "application/vnd.api+json"}
                 url = "https://api.pubg.com/shards/steam/players?filter[playerNames]={}".format(cont)
                 response = requests.get(url, headers=header)
@@ -118,4 +118,4 @@ async def on_message(message):
         await message.channel.send("Favor executar este comando no canal #rank! Obrigado!")
 
 
-client.run('DISCORD_BOT_TOKEN')
+client.run('DISCORD-BOT-TOKEN')
