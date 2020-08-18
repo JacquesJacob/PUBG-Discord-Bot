@@ -10,7 +10,7 @@ PUBG Official API Documentation: https://documentation.playbattlegrounds.com/en/
 
 My Discord Server: https://discord.gg/waddp7p
 
-Newest version of code: pubgfpp-3.py
+Newest version of code: pubgfpp-3.py and pubg-brasil.py
 
 requirements:
 
