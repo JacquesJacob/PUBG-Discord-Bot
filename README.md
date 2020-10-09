@@ -22,7 +22,7 @@ discord.py 1.3.4
 
 My Linkedin: https://www.linkedin.com/in/jacques-jacob-18279515/
 
-You can see the this project working on my Discord Server (channel #rank): https://discord.gg/QkRuWgy
+You can see a sample bot working on my own Discord Server (channel #rank): https://discord.gg/QkRuWgy
 
 Best Regards
 
