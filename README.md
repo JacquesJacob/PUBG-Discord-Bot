@@ -18,7 +18,7 @@ python 3.7
 
 requests 2.24.0
 
-discord.py 1.3.4
+discord.py 1.5.1
 
 My Linkedin: https://www.linkedin.com/in/jacques-jacob-18279515/
 
